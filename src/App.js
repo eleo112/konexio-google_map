@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GoogleMapReact from 'google-map-react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const markerStyle = { backgroundColor: 'white', width: 40, textAlign: 'center', padding: 5};
+const AnyReactComponent = ({ text }) => <div style={markerStyle}>{text}</div>;
+
+class App extends React.Component {
+  render() {
+    return (
+      <div style={{ width: 600, height: 600 }}>
+        <div style={{ height: '100%', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: "<YOUR_API_KEY>" }}
+            defaultCenter={this.props.center}
+            defaultZoom={this.props.zoom}
+          >
+            <AnyReactComponent
+              lat={48.856037}
+              lng={2.3899333}
+              text="AGECA"
+            />
+          </GoogleMapReact>
+        </div>
+      </div>
+    );
+  }
+}
+
+App.defaultProps = {
+  center: {
+    lat: 48.8588377,
+    lng: 2.27702
+  },
+  zoom: 12
 }
 
 export default App;
